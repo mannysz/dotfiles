@@ -1,2 +1,5 @@
 source $HOME/git-prompt.sh
-PS1='\e[0;36m[\u@\h \w\e[0;33m$(__git_ps1 " (%s)")\e[m\e[0;36m]$ \e[m'
+COLOR_BLUE='\[\033[0;36m\]'
+COLOR_GOLD='\[\033[0;33m\]'
+COLOR_DEFAULT='\[\033[0;0m\]'
+PS1="$COLOR_BLUE[\u@\h \W$COLOR_GOLD`__git_ps1`$COLOR_BLUE]\$ $COLOR_DEFAULT"
