@@ -1,2 +1,5 @@
 alias ll='ls -laG'
-
+alias runworker='celery worker --app eshares.celery_config -Q celery,user_waiting,whenever'
+alias runserver='workon eshares && python manage.py runserver'
+alias goshares='cd $HOME/src/eshares-certificates'
+alias relias='source $HOME/.alises'
