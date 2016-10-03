@@ -59,3 +59,7 @@ nmap <silent> ,/ :nohlsearch<CR>
 
 " Shortcut for sudo tee on :w
 cmap w!! w !sudo tee % >/dev/null
+
+
+" Auto Triggers Flake8 after persisting the buffer
+autocmd BufWritePost *.py call Flake8()
