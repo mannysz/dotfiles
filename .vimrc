@@ -3,13 +3,15 @@ syntax on
 filetype plugin indent on
 highlight ColorColumn ctermbg=8
 
-" Mappings
+" Plugins Settings
+let g:ctrlp_max_files=0
+
+" Mapping
 let mapleader=","
 
 " Editing VIMRC and Saving It
 nmap <silent> <leader>ev :e $MYVIMRC<CR>
 nmap <silent> <leader>sv :so $MYVIMRC<CR>
-
 
 " Preferences
 set hidden
@@ -57,9 +59,14 @@ map <C-up> <C-w>k
 " Cleanup search hightlights
 nmap <silent> ,/ :nohlsearch<CR>
 
+" Search CTags using CtrlP
+nnoremap <leader>. :CtrlPTag<cr>
+
+" Refresh CTags buffers
+map <f12> :!ctags --exclude=node_modules --exclude=.git --exclude=static --exclude=static_files --exclude=*.pyc -R .<cr>
+
 " Shortcut for sudo tee on :w
 cmap w!! w !sudo tee % >/dev/null
-
 
 " Auto Triggers Flake8 after persisting the buffer
 autocmd BufWritePost *.py call Flake8()

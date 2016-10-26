@@ -19,7 +19,7 @@ if [ -f `brew --prefix`/etc/bash_completion ]; then
 fi
 
 # enable path for home binary
-PATH=$PATH:$HOME/bin
+PATH=$PYENV_ROOT/bin:$PYENV_ROOT/shims:$PATH:$HOME/bin
 
 # define prompt colors
 COLOR_BLUE='\[\033[0;36m\]'

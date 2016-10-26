@@ -1,0 +1,6 @@
+# Basic options
+--recurse=yes
+--tag-relative=yes
+--exclude=.git
+--exclude=*.pyc
+--exclude=__pycache__
