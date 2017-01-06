@@ -94,19 +94,29 @@ map <C-right> <C-w>l
 map <C-up> <C-w>k
 map <C-p> :Files<cr>
 
+" Tab window management
+nnoremap <Tab> :tabn<cr>
+nnoremap <S-Tab> :tabp<cr>
+nnoremap <leader><Tab> :tabclose<cr>
+nnoremap <leader><S-Tab> :tabonly<cr>
+
+" Indentation Block Bindings
+vnoremap <Tab> >gv
+vnoremap <S-Tab> <gv
+
 " Cleanup search hightlights
 nmap <silent> ,/ :nohlsearch<CR>
 
 " Search CTags using FZF Files
 nnoremap <leader>. :Tags<cr>
 nnoremap <leader>/ :Ag<cr>
+nnoremap <leader>b :call fzf#run({'source': map(range(1, bufnr('$')), 'bufname(v:val)'),'sink': 'e', 'down': '30%'})<cr>
 
-" Refresh CTags buffers
+" Refresh Tags
 map <f12> :!ctags --exclude=node_modules --exclude=.git --exclude=static --exclude=static_files --exclude=*.pyc -R .<cr>
 
 " Shortcut for sudo tee on :w
 cmap w!! w !sudo tee % >/dev/null
 
 " Auto Triggers 
-" autocmd BufWritePost *.py call Flake8()
 autocmd VimEnter * command! -bang -nargs=* Ag call fzf#vim#ag(<q-args>, <bang>0 ? fzf#vim#with_preview('up:60%') : fzf#vim#with_preview('right:50%:hidden', '?'), <bang>0)
