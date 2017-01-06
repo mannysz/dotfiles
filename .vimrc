@@ -99,6 +99,7 @@ nmap <silent> ,/ :nohlsearch<CR>
 
 " Search CTags using FZF Files
 nnoremap <leader>. :Tags<cr>
+nnoremap <leader>/ :Ag<cr>
 
 " Refresh CTags buffers
 map <f12> :!ctags --exclude=node_modules --exclude=.git --exclude=static --exclude=static_files --exclude=*.pyc -R .<cr>
