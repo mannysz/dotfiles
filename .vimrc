@@ -1,4 +1,3 @@
-"execute pathogen#infect()
 syntax on
 filetype plugin indent on
 
@@ -21,6 +20,7 @@ call plug#end()
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
+set statusline+=%F
 
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
@@ -58,7 +58,6 @@ set laststatus=2
 set shiftwidth=4
 set shiftround
 set expandtab
-set colorcolumn=80
 set term=xterm
 set ignorecase
 set smartcase
@@ -78,8 +77,6 @@ set pastetoggle=<F2>
 set number
 
 highlight ColorColumn ctermbg=8
-
-" Settings by FileTypes
 filetype plugin indent on
 
 " Python Settings
@@ -111,6 +108,7 @@ nmap <silent> ,/ :nohlsearch<CR>
 nnoremap <leader>. :Tags<cr>
 nnoremap <leader>/ :Ag<cr>
 nnoremap <leader>b :call fzf#run({'source': map(range(1, bufnr('$')), 'bufname(v:val)'),'sink': 'e', 'down': '30%'})<cr>
+nnoremap <leader>c :let @/ = ""<cr>
 
 " Refresh Tags
 map <f12> :!ctags --exclude=node_modules --exclude=.git --exclude=static --exclude=static_files --exclude=*.pyc -R .<cr>
@@ -120,3 +118,6 @@ cmap w!! w !sudo tee % >/dev/null
 
 " Auto Triggers 
 autocmd VimEnter * command! -bang -nargs=* Ag call fzf#vim#ag(<q-args>, <bang>0 ? fzf#vim#with_preview('up:60%') : fzf#vim#with_preview('right:50%:hidden', '?'), <bang>0)
+
+" Color Scheme
+colorscheme default
