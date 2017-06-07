@@ -29,7 +29,7 @@ let g:syntastic_check_on_wq = 1
 
 let g:syntastic_c_checkers = ['check']
 let g:syntastic_cpp_checkers = ['check']
-let g:syntastic_javascript_checkers = ['json_tool']
+let g:syntastic_javascript_checkers = ['eslint']
 let g:syntastic_yaml_checkers = ['pyyaml']
 
 " fzf.vim
