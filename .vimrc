@@ -111,7 +111,7 @@ nnoremap <leader>b :call fzf#run({'source': map(range(1, bufnr('$')), 'bufname(v
 nnoremap <leader>c :let @/ = ""<cr>
 
 " Refresh Tags
-map <f12> :!ctags --exclude=node_modules --exclude=.git --exclude=static --exclude=static_files --exclude=*.pyc -R .<cr>
+map <f12> :!ctags --tag-relative --exclude='node_modules*' --exclude=.git --exclude='static' --exclude='static_files' --exclude='*.pyc' --exclude='__pycache__' --exclude='*\.min\.*' --exclude='*/migrations/*' --exclude='docs*' --exclude='logs*' -R .<cr>
 
 " Shortcut for sudo tee on :w
 cmap w!! w !sudo tee % >/dev/null

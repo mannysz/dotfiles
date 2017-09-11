@@ -5,3 +5,15 @@ alias goshares='cd $HOME/src/eshares-certificates && workon eshares'
 alias relias='source $HOME/.aliases'
 alias manage='python manage.py'
 alias clear-branches='for branch in `git branch | egrep -v \s?(master|develop).*$ | xargs`; do git branch -D $branch; done'
+alias fuck-it='export THEFUCK_REQUIRE_CONFIRMATION=False; fuck; export THEFUCK_REQUIRE_CONFIRMATION=True'
+function encrypt {
+    openssl aes-256-cbc -a -salt -in $1 -out $1.enc
+}
+
+function decrypt {
+    openssl aes-256-cbc -d -a -in $1 -out $1.new
+}
+
+function mpsconvert {
+    find . -type f -exec bash -c 'FILE="$1"; ffmpeg -i "${FILE}" -vn -ab 128k -ar 44100 -y "${FILE}.mp3";' _ '{}' \;
+}
