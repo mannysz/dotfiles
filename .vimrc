@@ -7,30 +7,34 @@ call plug#begin('~/.vim/plugged')
 Plug '/usr/local/opt/fzf' | Plug 'junegunn/fzf.vim'
 Plug 'davidhalter/jedi-vim'
 Plug 'Yggdroot/indentLine'
-Plug 'vim-syntastic/syntastic'
 Plug 'mileszs/ack.vim'
+Plug 'w0rp/ale'
 
 call plug#end()
 
 
 " Plugins Settings
-" let g:ctrlp_max_files=0
 
-" Syntastic
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
-set statusline+=%F
+" Ale
+let g:ale_linters = {
+\   'javascript': ['eslint'],
+\}
 
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 1
+let g:ale_pattern_options = {
+\   '\.(js|jsx|vue)$': {
+\       'ale_linters': {
+\           'vue': ['eslint'],
+\           'jsx': ['eslint'],
+\           'js': ['eslint'],
+\       },
+\   },
+\   '\.py$': {
+\       'ale_linters': {'python': ['flake8']},
+\   }
+\}
 
-let g:syntastic_c_checkers = ['check']
-let g:syntastic_cpp_checkers = ['check']
-let g:syntastic_javascript_checkers = ['eslint']
-let g:syntastic_yaml_checkers = ['pyyaml']
+" airline-vim
+let g:airline#extensions#tabline#enabled = 1
 
 " fzf.vim
 let g:fzf_tags_command = 'ctags -R'
@@ -76,7 +80,6 @@ set list
 set pastetoggle=<F2>
 set number
 
-highlight ColorColumn ctermbg=8
 filetype plugin indent on
 
 " Python Settings
@@ -109,6 +112,7 @@ nnoremap <leader>. :Tags<cr>
 nnoremap <leader>/ :Ag<cr>
 nnoremap <leader>b :call fzf#run({'source': map(range(1, bufnr('$')), 'bufname(v:val)'),'sink': 'e', 'down': '30%'})<cr>
 nnoremap <leader>c :let @/ = ""<cr>
+let $FZF_DEFAULT_COMMAND = 'ag -l -g ""'
 
 " Refresh Tags
 map <f12> :!ctags --tag-relative --exclude='node_modules*' --exclude=.git --exclude='static' --exclude='static_files' --exclude='*.pyc' --exclude='__pycache__' --exclude='*\.min\.*' --exclude='*/migrations/*' --exclude='docs*' --exclude='logs*' -R .<cr>
@@ -118,6 +122,11 @@ cmap w!! w !sudo tee % >/dev/null
 
 " Auto Triggers 
 autocmd VimEnter * command! -bang -nargs=* Ag call fzf#vim#ag(<q-args>, <bang>0 ? fzf#vim#with_preview('up:60%') : fzf#vim#with_preview('right:50%:hidden', '?'), <bang>0)
+augroup FileTypeGroup
+    autocmd!
+    au BufNewFile,BufRead *.jsx set filetype=javascript.jsx
+    au BufNewFile,BufRead *.vue set filetype=javascript.jsx
+augroup END
 
 " Color Scheme
 colorscheme default
