@@ -1,19 +1,58 @@
+# common aliases
 alias ll='ls -laG'
-alias runworker='celery -A eshares.celery_config worker -Q whenever,user_waiting,longtasks,default --concurrency=8 -l INFO'
-alias runserver='workon eshares && python manage.py runserver'
-alias goshares='cd $HOME/src/eshares-certificates && workon eshares'
-alias relias='source $HOME/.aliases'
+alias realias='source $HOME/.aliases'
 alias manage='python manage.py'
 alias clear-branches='for branch in `git branch | egrep -v \s?(master|develop).*$ | xargs`; do git branch -D $branch; done'
-alias fuck-it='export THEFUCK_REQUIRE_CONFIRMATION=False; fuck; export THEFUCK_REQUIRE_CONFIRMATION=True'
+
+
+# User Defined Functions
+
+# returns all directories listed in LOOKUPPATH function arguments
+function lookup_path() {
+    echo "${LOOKUPPATH//:/ }"
+}
+
+# change directory into a folder defined in LOOKUPPATH
+function goto() {
+    for path in $(lookup_path); do
+        if [ -d $path/$1 ]; then
+            cd $path/$1;
+            return 0
+        fi
+    done
+    echo "Directory not found in lookup path."
+    return 1
+}
+
+# overrides bultin change directory to autoload .env
+function cd {
+    if [ -f $1/.env ]; then
+        source $1/.env
+        echo "Loaded $(basename $1)/.env file."
+    fi
+    builtin cd $1
+}
+
+# runs commands defined in environment variables
+# good to use with project .env files
+function run {
+    if ! [ -z ${$1+x} ]; then
+        # call defined command
+        ${$1}
+    fi
+}
+
+# encrypts a file with a prompted password
 function encrypt {
     openssl aes-256-cbc -a -salt -in $1 -out $1.enc
 }
 
+# decrypts a file
 function decrypt {
     openssl aes-256-cbc -d -a -in $1 -out $1.new
 }
 
+# converts a list of video files into mp3 (audio only)
 function mpsconvert {
     find . -type f -exec bash -c 'FILE="$1"; ffmpeg -i "${FILE}" -vn -ab 128k -ar 44100 -y "${FILE}.mp3";' _ '{}' \;
 }

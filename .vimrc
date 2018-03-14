@@ -1,19 +1,38 @@
 syntax on
 filetype plugin indent on
 
+" ======= VimPlug Plugins ========
+
 " Specify a directory for plugins
 call plug#begin('~/.vim/plugged')
 
-Plug '/usr/local/opt/fzf' | Plug 'junegunn/fzf.vim'
-Plug 'davidhalter/jedi-vim'
+" Code style and linters
 Plug 'Yggdroot/indentLine'
-Plug 'mileszs/ack.vim'
 Plug 'w0rp/ale'
+" Code search and indexing
+Plug 'mileszs/ack.vim'
+Plug '/usr/local/opt/fzf' | Plug 'junegunn/fzf.vim'
+Plug 'majutsushi/tagbar'
+" Language auto-complete support
+Plug 'shougo/deoplete.nvim'
+Plug 'zchee/deoplete-jedi'
+Plug 'vim-scripts/pythoncomplete'
+Plug 'fatih/vim-go'
+" External plugin dependencies
+Plug 'roxma/nvim-yarp'
+Plug 'roxma/vim-hug-neovim-rpc'
+" Test runners
+Plug 'alfredodeza/pytest.vim'
 
 call plug#end()
 
 
-" Plugins Settings
+" Plugin Settings
+
+"Deoplete and Deoplete Jedi
+let g:python_host_prog = '/usr/local/bin/python'
+let g:python3_host_prog = '/usr/local/bin/python3'
+let g:deoplete#sources#jedi#show_docstring = 1
 
 " Ale
 let g:ale_linters = {
@@ -33,9 +52,6 @@ let g:ale_pattern_options = {
 \   }
 \}
 
-" airline-vim
-let g:airline#extensions#tabline#enabled = 1
-
 " fzf.vim
 let g:fzf_tags_command = 'ctags -R'
 let g:fzf_files_options = '--preview "(highlight -O ansi {} || cat {}) 2> /dev/null | head -'.&lines.'"'
@@ -44,12 +60,12 @@ let g:fzf_buffers_jump = 1
 " ack
 let g:ackprg = 'ag --vimgrep'
 
+" neocomplete
+let g:acp_enableAtStartup = 0
+let g:deoplete#enable_at_startup = 1
+
 " Mapping
 let mapleader=","
-
-" Editing VIMRC and Saving It
-nmap <silent> <leader>ev :e $MYVIMRC<CR>
-nmap <silent> <leader>sv :so $MYVIMRC<CR>
 
 " Preferences
 set hidden
@@ -103,9 +119,13 @@ nnoremap <leader><S-Tab> :tabonly<cr>
 " Indentation Block Bindings
 vnoremap <Tab> >gv
 vnoremap <S-Tab> <gv
+vnoremap ; :w !pbcopy<CR><CR>
 
-" Cleanup search hightlights
+" Cleanup search 
 nmap <silent> ,/ :nohlsearch<CR>
+
+" Toggle Tagbar
+noremap <leader>q :TagbarToggle<CR>
 
 " Search CTags using FZF Files
 nnoremap <leader>. :Tags<cr>
