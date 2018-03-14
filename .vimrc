@@ -53,6 +53,7 @@ let g:ale_pattern_options = {
 \}
 
 " fzf.vim
+set tags=.git/tags
 let g:fzf_tags_command = 'ctags -R'
 let g:fzf_files_options = '--preview "(highlight -O ansi {} || cat {}) 2> /dev/null | head -'.&lines.'"'
 let g:fzf_buffers_jump = 1
@@ -135,7 +136,7 @@ nnoremap <leader>c :let @/ = ""<cr>
 let $FZF_DEFAULT_COMMAND = 'ag -l -g ""'
 
 " Refresh Tags
-map <f12> :!ctags --tag-relative --exclude='node_modules*' --exclude=.git --exclude='static' --exclude='static_files' --exclude='*.pyc' --exclude='__pycache__' --exclude='*\.min\.*' --exclude='*/migrations/*' --exclude='docs*' --exclude='logs*' -R .<cr>
+map <f12> :!$HOME/.git_template/hooks/ctags <cr>
 
 " Shortcut for sudo tee on :w
 cmap w!! w !sudo tee % >/dev/null
