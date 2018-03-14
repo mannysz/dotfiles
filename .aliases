@@ -36,9 +36,10 @@ function cd {
 # runs commands defined in environment variables
 # good to use with project .env files
 function run {
-    if ! [ -z ${$1+x} ]; then
+    cmd=$1
+    if ! [ -z ${1+x} ]; then
         # call defined command
-        ${$1}
+        ${!1}
     fi
 }
 
