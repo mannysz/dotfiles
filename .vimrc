@@ -30,8 +30,8 @@ call plug#end()
 " Plugin Settings
 
 "Deoplete and Deoplete Jedi
-let g:python_host_prog = '/usr/local/bin/python'
-let g:python3_host_prog = '/usr/local/bin/python3'
+let g:python_host_prog = '/usr/local/bin/python2'
+let g:python3_host_prog = '/usr/local/bin/python'
 let g:deoplete#sources#jedi#show_docstring = 1
 
 " Ale
