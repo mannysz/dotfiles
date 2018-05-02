@@ -1,0 +1,6 @@
+function _goto {
+    local cur=${COMP_WORDS[COMP_CWORD]}
+    local arg_list=`list_workspace`
+    COMPREPLY=( $(compgen -W "$arg_list" -- $cur) )
+}
+complete -F _goto goto

@@ -29,7 +29,9 @@ PS1="$COLOR_BLUE[\u@\h \W$COLOR_GOLD\$(__git_ps1 ' (%s)')$COLOR_BLUE]\$ $COLOR_D
 
 # virtualenv wrapper settings
 VIRTUALENVWRAPPER_PYTHON=/usr/local/bin/python
-source /usr/local/bin/virtualenvwrapper.sh
+if [ -f /usr/local/bin/virtualenvwrapper.sh ]; then
+    source /usr/local/bin/virtualenvwrapper.sh
+fi
 
 # lookup path for "goto" custom function defined in .aliases
 LOOKUPPATH=$HOME/repo:$HOME/src

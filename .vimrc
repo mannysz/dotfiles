@@ -23,11 +23,17 @@ Plug 'roxma/nvim-yarp'
 Plug 'roxma/vim-hug-neovim-rpc'
 " Test runners
 Plug 'alfredodeza/pytest.vim'
+" JSX support
+Plug 'pangloss/vim-javascript'
+Plug 'mxw/vim-jsx'
 
 call plug#end()
 
 
 " Plugin Settings
+
+" Vim JSX
+let g:jsx_ext_required = 1
 
 "Deoplete and Deoplete Jedi
 let g:python_host_prog = '/usr/local/bin/python2'
@@ -67,6 +73,9 @@ let g:deoplete#enable_at_startup = 1
 
 " Mapping
 let mapleader=","
+
+" Setting python path to use current project bin
+let $PYTHONPATH = getcwd().':'.$PYTHONPATH
 
 " Preferences
 set hidden

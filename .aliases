@@ -2,18 +2,27 @@
 alias ll='ls -laG'
 alias realias='source $HOME/.aliases'
 alias manage='python manage.py'
-alias clear-branches='for branch in `git branch | egrep -v \s?(master|develop).*$ | xargs`; do git branch -D $branch; done'
+alias clear-branches='for branch in `git branch | egrep -v \s?(master|pm-develop).*$ | xargs`; do git branch -D $branch; done'
 
 
 # User Defined Functions
 
 # returns all directories listed in LOOKUPPATH function arguments
-function lookup_path() {
+function lookup_path {
     echo "${LOOKUPPATH//:/ }"
 }
 
+# list all projects in lookup_path
+function list_workspace {
+    for path in $(lookup_path); do
+        if [ -d $path ]; then
+            ls $path
+        fi
+    done | xargs
+}
+
 # change directory into a folder defined in LOOKUPPATH
-function goto() {
+function goto {
     for path in $(lookup_path); do
         if [ -d $path/$1 ]; then
             cd $path/$1;
