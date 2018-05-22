@@ -1,8 +1,7 @@
 # common aliases
 alias ll='ls -laG'
-alias realias='source $HOME/.aliases'
 alias manage='python manage.py'
-alias clear-branches='for branch in `git branch | egrep -v \s?(master|pm-develop).*$ | xargs`; do git branch -D $branch; done'
+alias clear-branches='for branch in `git branch | egrep -v \s?(master|pm-develop|bp/bulk-modify-options-modal).*$ | xargs`; do git branch -D $branch; done'
 
 
 # User Defined Functions
@@ -35,11 +34,11 @@ function goto {
 
 # overrides bultin change directory to autoload .env
 function cd {
-    if [ -f $1/.env ]; then
-        source $1/.env
+    if [ -f "${@:1}/.env" ]; then
+        source ${@:1}/.env
         echo "Loaded $(basename $1)/.env file."
     fi
-    builtin cd $1
+    builtin cd "${@:1}"
 }
 
 # runs commands defined in environment variables
@@ -62,7 +61,7 @@ function decrypt {
     openssl aes-256-cbc -d -a -in $1 -out $1.new
 }
 
-# converts a list of video files into mp3 (audio only)
+# converts a list of video files into mp3
 function mpsconvert {
     find . -type f -exec bash -c 'FILE="$1"; ffmpeg -i "${FILE}" -vn -ab 128k -ar 44100 -y "${FILE}.mp3";' _ '{}' \;
 }
