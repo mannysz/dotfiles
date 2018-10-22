@@ -1,7 +1,7 @@
 # common aliases
 alias ll='ls -laG'
 alias manage='python manage.py'
-alias clear-branches='for branch in `git branch | egrep -v \s?(master|pm-develop|bp/bulk-modify-options-modal).*$ | xargs`; do git branch -D $branch; done'
+alias clear-branches='for branch in `git branch | egrep -v \s?(master|pm-develop).*$ | xargs`; do git branch -D $branch; done'
 
 
 # User Defined Functions
