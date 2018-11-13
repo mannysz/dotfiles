@@ -8,11 +8,6 @@ if [ -f $HOME/.aliases ]; then
     . $HOME/.aliases
 fi
 
-# loading autoenv if it exists
-if [ -f /usr/local/opt/autoenv/activate.sh ]; then
-    . /usr/local/opt/autoenv/activate.sh
-fi
-
 # enabling git completion on bash
 if [ -f `brew --prefix`/etc/bash_completion ]; then
     . `brew --prefix`/etc/bash_completion
