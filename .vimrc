@@ -71,6 +71,9 @@ let g:ackprg = 'ag --vimgrep'
 let g:acp_enableAtStartup = 0
 let g:deoplete#enable_at_startup = 1
 
+" indentLine
+let g:indentLine_char = '│'
+
 " Mapping
 let mapleader=","
 
@@ -88,7 +91,6 @@ set laststatus=2
 set shiftwidth=4
 set shiftround
 set expandtab
-set term=xterm
 set ignorecase
 set smartcase
 set smarttab
@@ -98,13 +100,14 @@ set history=1000
 set undolevels=1000
 set wildignore=*.swp,*.pyc,*.bak,*.class,*.o,*.a
 set title
-set visualbell
-set noerrorbells
 set nobackup
+set nowritebackup
+set noswapfile
 set listchars=tab:>.,trail:.,extends:#,nbsp:.
 set list
 set pastetoggle=<F2>
 set number
+set clipboard^=unnamed
 
 filetype plugin indent on
 
