@@ -17,7 +17,6 @@ Plug 'majutsushi/tagbar'
 Plug 'shougo/deoplete.nvim'
 Plug 'zchee/deoplete-jedi'
 Plug 'vim-scripts/pythoncomplete'
-Plug 'fatih/vim-go'
 " External plugin dependencies
 Plug 'roxma/nvim-yarp'
 Plug 'roxma/vim-hug-neovim-rpc'
