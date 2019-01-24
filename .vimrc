@@ -35,8 +35,8 @@ call plug#end()
 let g:jsx_ext_required = 1
 
 "Deoplete and Deoplete Jedi
-let g:python_host_prog = '/usr/local/bin/python2'
-let g:python3_host_prog = '/usr/local/bin/python'
+let g:python_host_prog = '/usr/bin/python'
+let g:python3_host_prog = '/usr/local/bin/python3'
 let g:deoplete#sources#jedi#show_docstring = 1
 
 " Ale
