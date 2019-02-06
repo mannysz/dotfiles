@@ -1,7 +1,6 @@
 [user]
     name = Emanuel de Souza
     email = emanuelcds@gmail.com
-    signingkey = 3E89BB78
 [init]
     templatedir = ~/.git_template
 [core]
@@ -9,6 +8,10 @@
     editor = /usr/local/bin/vim
 [alias]
     recent-branches = for-each-ref --sort=-committerdate --count=10 --format='%(refname:short)' refs/heads/
-    bsf = for-each-ref --sort=committerdate refs/heads/ --format='%(HEAD) %(color:yellow)%(refname:short)%(color:reset) - %(color:red)%(objectname:short)%(color:reset) - %(contents:subject) - %(color:blue)%(authorname)%(color:reset) %(color:green)%(committerdate:relative)%(color:reset)'
+    bsf = for-each-ref --sort=-committerdate refs/heads/ --format='%(HEAD) %(color:yellow)%(refname:short)%(color:reset) - %(color:red)%(objectname:short)%(color:reset) - %(contents:subject) - %(color:blue)%(authorname)%(color:reset) %(color:green)%(committerdate:relative)%(color:reset)'
+    c = !git add -A && git commit
+    p = !git push origin $(git rev-parse --abrev-ref HEAD)
+    amend = !git commit --ammend
+
 [merge]
     tool = vimdiff
