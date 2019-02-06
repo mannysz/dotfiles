@@ -25,6 +25,8 @@ Plug 'alfredodeza/pytest.vim'
 " JSX support
 Plug 'pangloss/vim-javascript'
 Plug 'mxw/vim-jsx'
+"Git integration
+Plug 'tpope/vim-fugitive'
 
 call plug#end()
 
