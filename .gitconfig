@@ -1,5 +1,5 @@
 [user]
-    name = Emanuel de Souza
+	name = Emanuel Souza
     email = emanuelcds@gmail.com
 [init]
     templatedir = ~/.git_template

@@ -15,23 +15,32 @@ Plug '/usr/local/opt/fzf' | Plug 'junegunn/fzf.vim'
 Plug 'majutsushi/tagbar'
 " Language auto-complete support
 Plug 'shougo/deoplete.nvim'
+Plug 'davidhalter/jedi-vim'
 Plug 'zchee/deoplete-jedi'
-Plug 'vim-scripts/pythoncomplete'
 " External plugin dependencies
 Plug 'roxma/nvim-yarp'
 Plug 'roxma/vim-hug-neovim-rpc'
-" Test runners
-Plug 'alfredodeza/pytest.vim'
 " JSX support
 Plug 'pangloss/vim-javascript'
 Plug 'mxw/vim-jsx'
 "Git integration
 Plug 'tpope/vim-fugitive'
+" C-Sharp Integration
+Plug 'OmniSharp/omnisharp-vim'
+" Command execution
+Plug 'tpope/vim-dispatch'
+" Syntax Hightlight
+Plug 'solarnz/thrift.vim'
 
 call plug#end()
 
 
 " Plugin Settings
+
+" OmniSharp
+let g:OmniSharp_selector_ui = 'fzf'
+let g:OmniSharp_highlight_types = 1
+let g:OmniSharp_server_use_mono = 1
 
 " Vim JSX
 let g:jsx_ext_required = 1
@@ -39,11 +48,20 @@ let g:jsx_ext_required = 1
 "Deoplete and Deoplete Jedi
 let g:python_host_prog = '/usr/bin/python'
 let g:python3_host_prog = '/usr/local/bin/python3'
-let g:deoplete#sources#jedi#show_docstring = 1
+let g:jedi#show_call_signatures = '1'
+let g:jedi#goto_command = "<leader>d"
+let g:jedi#goto_assignments_command = "<leader>g"
+let g:jedi#goto_definitions_command = "<leader>D"
+let g:jedi#documentation_command = "K"
+let g:jedi#usages_command = "<leader>n"
+let g:jedi#completions_command = ""
+let g:jedi#rename_command = "<leader>r"
+let g:jedi#completions_enabled = 0
 
 " Ale
 let g:ale_linters = {
 \   'javascript': ['eslint'],
+\   'cs': ['OmniSharp'],
 \}
 
 let g:ale_pattern_options = {
@@ -82,11 +100,14 @@ let mapleader=","
 let $PYTHONPATH = getcwd().':'.$PYTHONPATH
 
 " Preferences
+filetype plugin indent on
+
 set hidden
 set nowrap
 set backspace=indent,eol,start
-set autoindent
 set copyindent
+set smartindent
+set autoindent
 set ts=4
 set laststatus=2
 set shiftwidth=4
@@ -110,11 +131,9 @@ set pastetoggle=<F2>
 set number
 set clipboard^=unnamed
 
-filetype plugin indent on
-
-" Python Settings
+" Auto Command General Settings
 if has('autocmd')
-    autocmd filetype python set expandtab
+    autocmd filetype python,php,c,cpp,golang,javascript,es6 set ai expandtab
 endif
 
 " Easy window navigation
