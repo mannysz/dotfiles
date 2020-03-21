@@ -33,7 +33,6 @@ Plug 'solarnz/thrift.vim'
 " Status Bar and Color scheme
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-Plug 'danilo-augusto/vim-afterglow'
 
 call plug#end()
 
@@ -83,7 +82,7 @@ let g:ale_pattern_options = {
 
 " fzf.vim
 set tags=.git/tags
-let g:fzf_tags_command = 'ctags -R'
+let g:fzf_tags_command = 'ctags -R -f .git/tags'
 let g:fzf_files_options = '--preview "(highlight -O ansi {} || cat {}) 2> /dev/null | head -'.&lines.'"'
 let g:fzf_buffers_jump = 1
 
@@ -193,4 +192,4 @@ augroup FileTypeGroup
 augroup END
 
 " Color Scheme
-colorscheme afterglow
+let g:afterglow_italic_comments=0
