@@ -1,4 +1,5 @@
 #/bin/bash
+
 brew install bash-completion
 brew install reattach-to-user-namespace
 brew install tmux
@@ -13,8 +14,6 @@ pyenv install 3.6.5
 pyenv global 3.6.5
 pyenv local 3.6.5
 pip3 install neovim
-pip3 install 
 
 n lts
-npm install -g neovim
-npm install -g eslint
+npm install -g neovim eslint prettier eslint-plugin-prettier
