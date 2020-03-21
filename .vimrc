@@ -140,6 +140,7 @@ set list
 set pastetoggle=<F2>
 set number
 set clipboard^=unnamed
+set showmatch
 
 " Auto Command General Settings
 if has('autocmd')
