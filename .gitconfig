@@ -5,13 +5,15 @@
     templatedir = ~/.git_template
 [core]
     excludesfile = /Users/emanuel/.gitignore
-    editor = /usr/local/bin/vim
+    editor = vim
 [alias]
     recent-branches = for-each-ref --sort=-committerdate --count=10 --format='%(refname:short)' refs/heads/
     bsf = for-each-ref --sort=-committerdate refs/heads/ --format='%(HEAD) %(color:yellow)%(refname:short)%(color:reset) - %(color:red)%(objectname:short)%(color:reset) - %(contents:subject) - %(color:blue)%(authorname)%(color:reset) %(color:green)%(committerdate:relative)%(color:reset)'
     c = !git add -A && git commit
     p = !git push origin $(git rev-parse --abbrev-ref HEAD)
-    amend = !git commit --ammend
+    pu = !git pull && git merge
+    pr = !git rebase
+    am = !git commit --amend
 
 [merge]
     tool = vimdiff
