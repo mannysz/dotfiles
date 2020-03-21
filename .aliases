@@ -3,6 +3,7 @@ alias ll='ls -laG'
 alias manage='python manage.py'
 alias clear-branches='for branch in `git branch | egrep -v \s?(master|pm-develop).*$ | xargs`; do git branch -D $branch; done'
 alias g=git
+alias vim=nvim
 
 
 # User Defined Functions

@@ -14,40 +14,38 @@ Plug 'mileszs/ack.vim'
 Plug '/usr/local/opt/fzf' | Plug 'junegunn/fzf.vim'
 Plug 'majutsushi/tagbar'
 " Language auto-complete support
-Plug 'shougo/deoplete.nvim'
+if has('nvim')
+  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+else
+  Plug 'Shougo/deoplete.nvim'
+  Plug 'roxma/nvim-yarp'
+  Plug 'roxma/vim-hug-neovim-rpc'
+endif
 Plug 'davidhalter/jedi-vim'
 Plug 'zchee/deoplete-jedi'
-" External plugin dependencies
-Plug 'roxma/nvim-yarp'
-Plug 'roxma/vim-hug-neovim-rpc'
 " JSX support
 Plug 'pangloss/vim-javascript'
 Plug 'mxw/vim-jsx'
 "Git integration
 Plug 'tpope/vim-fugitive'
-" C-Sharp Integration
-Plug 'OmniSharp/omnisharp-vim'
-" Command execution
-Plug 'tpope/vim-dispatch'
 " Syntax Hightlight
 Plug 'solarnz/thrift.vim'
+" Status Bar and Color scheme
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'danilo-augusto/vim-afterglow'
 
 call plug#end()
 
 
 " Plugin Settings
 
-" OmniSharp
-let g:OmniSharp_selector_ui = 'fzf'
-let g:OmniSharp_highlight_types = 1
-let g:OmniSharp_server_use_mono = 1
-
 " Vim JSX
 let g:jsx_ext_required = 1
 
 "Deoplete and Deoplete Jedi
 let g:python_host_prog = '/usr/bin/python'
-let g:python3_host_prog = '/usr/local/bin/python3'
+let g:python3_host_prog = expand('~/.pyenv/shims/python3')
 let g:jedi#show_call_signatures = '1'
 let g:jedi#goto_command = "<leader>d"
 let g:jedi#goto_assignments_command = "<leader>g"
@@ -63,6 +61,12 @@ let g:ale_linters = {
 \   'javascript': ['eslint'],
 \   'cs': ['OmniSharp'],
 \}
+
+let g:ale_fixers = {
+\   'javascript': ['eslint']
+\}
+
+let g:ale_fix_on_save = 1
 
 let g:ale_pattern_options = {
 \   '\.(js|jsx|vue)$': {
@@ -89,6 +93,13 @@ let g:ackprg = 'ag --vimgrep'
 " neocomplete
 let g:acp_enableAtStartup = 0
 let g:deoplete#enable_at_startup = 1
+
+" Airline
+let g:airline_theme='minimalist'
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#left_sep = ' '
+let g:airline#extensions#tabline#left_alt_sep = '|'
+let g:airline#extensions#tabline#formatter = 'unique_tail_improved'
 
 " indentLine
 let g:indentLine_char = '│'
@@ -182,4 +193,4 @@ augroup FileTypeGroup
 augroup END
 
 " Color Scheme
-colorscheme default
+colorscheme afterglow
