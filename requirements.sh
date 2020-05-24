@@ -8,12 +8,16 @@ brew install ag
 brew install ctags
 brew install n
 brew install pyenv
+brew install lua
 brew install neovim
 
+# Python
 pyenv install 3.6.5
 pyenv global 3.6.5
 pyenv local 3.6.5
 pip3 install neovim
 
+
+# NodeJS
 n lts
 npm install -g neovim eslint prettier eslint-plugin-prettier
