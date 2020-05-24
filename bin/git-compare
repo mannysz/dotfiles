@@ -1,0 +1,5 @@
+#!/bin/sh
+source=$1
+test -z $source && source=master
+branch=$(git rev-parse --abbrev-ref HEAD)
+hub compare $source...$branch
