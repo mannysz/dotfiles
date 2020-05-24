@@ -8,7 +8,7 @@ call plug#begin('~/.vim/plugged')
 
 " Code style and linters
 Plug 'Yggdroot/indentLine'
-Plug 'w0rp/ale'
+Plug 'dense-analysis/ale'
 " Code search and indexing
 Plug 'mileszs/ack.vim'
 Plug '/usr/local/opt/fzf' | Plug 'junegunn/fzf.vim'
@@ -26,6 +26,8 @@ Plug 'zchee/deoplete-jedi'
 " JSX support
 Plug 'pangloss/vim-javascript'
 Plug 'mxw/vim-jsx'
+" Lua support
+Plug 'xolox/vim-lua-ftplugin'
 "Git integration
 Plug 'tpope/vim-fugitive'
 " Syntax Hightlight
@@ -55,14 +57,24 @@ let g:jedi#completions_command = ""
 let g:jedi#rename_command = "<leader>r"
 let g:jedi#completions_enabled = 0
 
+"Deoplete with Lua FT Plugin
+let g:lua_check_syntax = 0
+let g:lua_complete_omni = 1
+let g:lua_complete_dynamic = 0
+let g:lua_define_completion_mappings = 0
+
+call deoplete#custom#var('omni', 'functions', {
+\ 'lua': 'xolox#lua#omnifunc',
+\ })
+
 " Ale
 let g:ale_linters = {
 \   'javascript': ['eslint'],
-\   'cs': ['OmniSharp'],
+\   'lua': ['luac'],
 \}
 
 let g:ale_fixers = {
-\   'javascript': ['eslint']
+\   'javascript': ['prettier', 'eslint']
 \}
 
 let g:ale_fix_on_save = 1
