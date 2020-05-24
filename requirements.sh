@@ -10,6 +10,7 @@ brew install n
 brew install pyenv
 brew install lua
 brew install neovim
+brew install hub
 
 # Python
 pyenv install 3.6.5
