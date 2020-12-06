@@ -26,8 +26,6 @@ Plug 'zchee/deoplete-jedi'
 " JSX support
 Plug 'pangloss/vim-javascript'
 Plug 'mxw/vim-jsx'
-" Lua support
-Plug 'xolox/vim-lua-ftplugin'
 "Git integration
 Plug 'tpope/vim-fugitive'
 " Syntax Hightlight
@@ -45,7 +43,6 @@ call plug#end()
 let g:jsx_ext_required = 1
 
 "Deoplete and Deoplete Jedi
-let g:python_host_prog = '/usr/bin/python'
 let g:python3_host_prog = expand('~/.pyenv/shims/python3')
 let g:jedi#show_call_signatures = '1'
 let g:jedi#goto_command = "<leader>d"

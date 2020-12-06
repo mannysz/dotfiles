@@ -8,19 +8,13 @@ if [ -f $HOME/.aliases ]; then
     . $HOME/.aliases
 fi
 
-# enabling git completion on bash
-if [ -f `brew --prefix`/etc/bash_completion ]; then
-    . `brew --prefix`/etc/bash_completion
-fi
+# PYENV Settings
+export PYENV_ROOT=$HOME/.pyenv
+export PATH=$HOME/bin:$PYENV_ROOT/shims:$PATH
 
-# enable path for home binary
-PATH=$PYENV_ROOT/bin:$PYENV_ROOT/shims:$PATH:$HOME/bin
+# lookup path for "goto" custom function defined in .aliases
+export LOOKUPPATH=$HOME/repo:$HOME/src
 
-# define prompt colors
-COLOR_BLUE='\[\033[0;36m\]'
-COLOR_GOLD='\[\033[0;33m\]'
-COLOR_DEFAULT='\[\033[0;0m\]'
-PS1="$COLOR_BLUE[\u@\h \W$COLOR_GOLD\$(__git_ps1 ' (%s)')$COLOR_BLUE]\$ $COLOR_DEFAULT"
 
 # virtualenv wrapper settings
 VIRTUALENVWRAPPER_PYTHON=/usr/bin/python
@@ -28,5 +22,10 @@ if [ -f /usr/local/bin/virtualenvwrapper.sh ]; then
     source /usr/local/bin/virtualenvwrapper.sh
 fi
 
-# lookup path for "goto" custom function defined in .aliases
-LOOKUPPATH=$HOME/repo:$HOME/src
+
+# pyenv initialization
+if [ command -v pyenv 1>/dev/null 2>&1 ]; then
+    eval "$(pyenv init -)"
+fi
+
+source $HOME/.bash_completion
