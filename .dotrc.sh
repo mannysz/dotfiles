@@ -8,9 +8,12 @@ if [ -f $HOME/.aliases ]; then
     . $HOME/.aliases
 fi
 
+# Node Version Manager Settings
+export N_PREFIX=$HOME/.n
+
 # PYENV Settings
 export PYENV_ROOT=$HOME/.pyenv
-export PATH=$HOME/bin:$PYENV_ROOT/shims:$PATH
+export PATH=$HOME/bin:$PYENV_ROOT/shims:$N_PREFIX/bin:$PATH
 
 # lookup path for "goto" custom function defined in .aliases
 export LOOKUPPATH=$HOME/repo:$HOME/src
