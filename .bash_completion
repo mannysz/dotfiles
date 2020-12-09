@@ -3,4 +3,12 @@ function _goto {
     local arg_list=`list_workspace`
     COMPREPLY=( $(compgen -W "$arg_list" -- $cur) )
 }
+
+function _venvload {
+    local cur=${COMP_WORDS[COMP_CWORD]}
+    local arg_list=`venvlist`
+    COMPREPLY=( $(compgen -W "$arg_list" -- $cur) )
+}
+
 complete -F _goto goto
+complete -F _venvload venvload

@@ -18,14 +18,6 @@ export PATH=$HOME/bin:$PYENV_ROOT/shims:$N_PREFIX/bin:$PATH
 # lookup path for "goto" custom function defined in .aliases
 export LOOKUPPATH=$HOME/repo:$HOME/src
 
-
-# virtualenv wrapper settings
-VIRTUALENVWRAPPER_PYTHON=/usr/bin/python
-if [ -f /usr/local/bin/virtualenvwrapper.sh ]; then
-    source /usr/local/bin/virtualenvwrapper.sh
-fi
-
-
 # pyenv initialization
 if [ command -v pyenv 1>/dev/null 2>&1 ]; then
     eval "$(pyenv init -)"

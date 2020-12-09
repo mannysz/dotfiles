@@ -37,6 +37,24 @@ function goto {
     return 1
 }
 
+# simple virtualenvwrapper implementation
+function venvmake {
+    [ $# -eq 0 ] && echo "No parameters passed"
+    [ ! -d "$HOME/.virtualenvs" ] && mkdir -p $HOME/.virtualenvs
+    [ ! -d "$HOME/.virtualenvs/$1" ] && virtualenv $HOME/.virtualenvs/$1 || echo "Virtualenv $0 already exists."
+}
+
+# private function that lists all created virtualenvs
+function venvlist {
+    [ -d "$HOME/.virtualenvs" ] && ls $HOME/.virtualenvs | xargs
+}
+
+# loads a previously created python virtual env
+function venvload {
+    [ $# -eq 0 ] && echo "No parameters passed"
+    [ -d "$HOME/.virtualenvs/$1" ] && source $HOME/.virtualenvs/$1/bin/activate || echo "Virtualenv $0 does not exist."
+}
+
 # overrides bultin change directory to autoload .env
 function cd {
     if [ -f "${@:1}/.env" ]; then
