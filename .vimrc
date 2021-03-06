@@ -14,15 +14,12 @@ Plug 'mileszs/ack.vim'
 Plug '/usr/local/opt/fzf' | Plug 'junegunn/fzf.vim'
 Plug 'majutsushi/tagbar'
 " Language auto-complete support
-if has('nvim')
-  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-else
-  Plug 'Shougo/deoplete.nvim'
-  Plug 'roxma/nvim-yarp'
-  Plug 'roxma/vim-hug-neovim-rpc'
-endif
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+" Python Support
 Plug 'davidhalter/jedi-vim'
 Plug 'zchee/deoplete-jedi'
+" C# and .NET Support
+Plug 'OmniSharp/omnisharp-vim'
 " JSX support
 Plug 'pangloss/vim-javascript'
 Plug 'mxw/vim-jsx'
@@ -68,6 +65,8 @@ call deoplete#custom#var('omni', 'functions', {
 let g:ale_linters = {
 \   'javascript': ['eslint'],
 \   'lua': ['luac'],
+\   'cs': ['OmniSharp'],
+\   'py': ['flake8', 'pylint'],
 \}
 
 let g:ale_fixers = {
