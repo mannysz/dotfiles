@@ -111,3 +111,12 @@ source $ZSH/oh-my-zsh.sh
 
 source $HOME/.aliases
 source $HOME/.dotrc.sh
+
+. /Users/emanueldesouza/.uw/uwrapper.sh
+. /Users/emanueldesouza/.uw/bashcompletion.sh
+
+###-tns-completion-start-###
+if [ -f /Users/emanueldesouza/.tnsrc ]; then 
+    source /Users/emanueldesouza/.tnsrc 
+fi
+###-tns-completion-end-###

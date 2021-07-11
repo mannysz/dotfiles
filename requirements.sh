@@ -10,8 +10,9 @@ brew install fzf
 brew install ag
 brew install ctags
 brew install n
-brew install pyenv
+brew install python@3.9
 brew install lua
+brew install luajit
 brew install neovim
 brew install hub
 

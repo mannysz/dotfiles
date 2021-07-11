@@ -6,22 +6,19 @@ filetype plugin indent on
 " Specify a directory for plugins
 call plug#begin('~/.vim/plugged')
 
-" Code style and linters
+"Language server
+Plug 'neovim/nvim-lspconfig'
+"Auto completion plugin
+Plug 'hrsh7th/nvim-compe'
+"Fuzzy Search
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
+" Code style
 Plug 'Yggdroot/indentLine'
-Plug 'dense-analysis/ale'
 " Code search and indexing
 Plug 'mileszs/ack.vim'
-Plug '/usr/local/opt/fzf' | Plug 'junegunn/fzf.vim'
 Plug 'majutsushi/tagbar'
-" Language auto-complete support
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-" Python Support
-Plug 'davidhalter/jedi-vim'
-Plug 'zchee/deoplete-jedi'
-" C# and .NET Support
-Plug 'OmniSharp/omnisharp-vim'
-" JSX support
-Plug 'pangloss/vim-javascript'
+" React and JSX
 Plug 'mxw/vim-jsx'
 "Git integration
 Plug 'tpope/vim-fugitive'
@@ -36,70 +33,65 @@ call plug#end()
 
 " Plugin Settings
 
+"Language Servers
+lua << EOF
+-- Python Support
+require 'lspconfig'.pylsp.setup({})
+
+-- Bash Script
+require'lspconfig'.bashls.setup{}
+
+-- HTML/CSS
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+capabilities.textDocument.completion.completionItem.snippetSupport = true
+
+require'lspconfig'.html.setup {
+  capabilities = capabilities,
+}
+
+-- Auto completion
+
+require'compe'.setup {
+  enabled = true;
+  autocomplete = true;
+  debug = false;
+  min_length = 1;
+  preselect = 'enable';
+  throttle_time = 80;
+  source_timeout = 200;
+  incomplete_delay = 400;
+  max_abbr_width = 100;
+  max_kind_width = 100;
+  max_menu_width = 100;
+  documentation = true;
+
+  source = {
+    path = true;
+    buffer = true;
+    calc = true;
+    nvim_lsp = true;
+    nvim_lua = true;
+    vsnip = true;
+    ultisnips = true;
+  };
+}
+
+vim.o.completeopt = "menuone,noselect"
+
+EOF
+
+"Auto completion mapping
+inoremap <silent><expr> <C-Space> compe#complete()
+inoremap <silent><expr> <CR>      compe#confirm('<CR>')
+inoremap <silent><expr> <C-e>     compe#close('<C-e>')
+inoremap <silent><expr> <C-f>     compe#scroll({ 'delta': +4 })
+inoremap <silent><expr> <C-d>     compe#scroll({ 'delta': -4 })
+
 " Vim JSX
 let g:jsx_ext_required = 1
 
-"Deoplete and Deoplete Jedi
-let g:python3_host_prog = expand('~/.pyenv/shims/python3')
-let g:jedi#show_call_signatures = '1'
-let g:jedi#goto_command = "<leader>d"
-let g:jedi#goto_assignments_command = "<leader>g"
-let g:jedi#goto_definitions_command = "<leader>D"
-let g:jedi#documentation_command = "K"
-let g:jedi#usages_command = "<leader>n"
-let g:jedi#completions_command = ""
-let g:jedi#rename_command = "<leader>r"
-let g:jedi#completions_enabled = 0
-
-"Deoplete with Lua FT Plugin
-let g:lua_check_syntax = 0
-let g:lua_complete_omni = 1
-let g:lua_complete_dynamic = 0
-let g:lua_define_completion_mappings = 0
-
-call deoplete#custom#var('omni', 'functions', {
-\ 'lua': 'xolox#lua#omnifunc',
-\ })
-
-" Ale
-let g:ale_linters = {
-\   'javascript': ['eslint'],
-\   'lua': ['luac'],
-\   'cs': ['OmniSharp'],
-\   'py': ['flake8', 'pylint'],
-\}
-
-let g:ale_fixers = {
-\   'javascript': ['prettier', 'eslint']
-\}
-
-let g:ale_fix_on_save = 1
-
-let g:ale_pattern_options = {
-\   '\.(js|jsx|vue)$': {
-\       'ale_linters': {
-\           'vue': ['eslint'],
-\           'jsx': ['eslint'],
-\           'js': ['eslint'],
-\       },
-\   },
-\   '\.py$': {
-\       'ale_linters': {'python': ['flake8']},
-\   }
-\}
-
-" fzf.vim
-set tags=.git/tags
-let g:fzf_tags_command = 'ctags -R -f .git/tags'
-let g:fzf_files_options = '--preview "(highlight -O ansi {} || cat {}) 2> /dev/null | head -'.&lines.'"'
-let g:fzf_buffers_jump = 1
-
 " ack
 let g:ackprg = 'ag --vimgrep'
-
-" neocomplete
-let g:acp_enableAtStartup = 0
-let g:deoplete#enable_at_startup = 1
 
 " Airline
 let g:airline_theme='minimalist'
@@ -116,6 +108,11 @@ let mapleader=","
 
 " Setting python path to use current project bin
 let $PYTHONPATH = getcwd().':'.$PYTHONPATH
+
+" FZF Settings
+
+" Close preview window when leaving insert mode (workaround deoplete bug)
+" autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
 
 " Preferences
 filetype plugin indent on
@@ -152,7 +149,7 @@ set showmatch
 
 " Auto Command General Settings
 if has('autocmd')
-    autocmd filetype python,php,c,cpp,golang,javascript,es6 set ai expandtab
+    autocmd filetype python,c,cpp,golang,javascript,typescript,es6,lua,jsx set ai expandtab
 endif
 
 " Easy window navigation
@@ -160,34 +157,30 @@ map <C-left> <C-w>h
 map <C-down> <C-w>j
 map <C-right> <C-w>l
 map <C-up> <C-w>k
-map <C-p> :Files<cr>
+
+" Project navigation
+noremap <C-p> :GFiles<cr>
+noremap <C-b> :Buffers<cr>
+noremap <leader>/ :Ag<cr>
+
+" Git (vim-fugitive)
+map <C-g> :BCommits<cr>
+map <leader>g :Git blame<cr>
 
 " Tab window management
 nnoremap <Tab> :tabn<cr>
 nnoremap <S-Tab> :tabp<cr>
 nnoremap <leader><Tab> :tabclose<cr>
-nnoremap <leader><S-Tab> :tabonly<cr>
 
 " Indentation Block Bindings
 vnoremap <Tab> >gv
 vnoremap <S-Tab> <gv
-vnoremap ; :w !pbcopy<CR><CR>
-
-" Cleanup search 
-nmap <silent> ,/ :nohlsearch<CR>
 
 " Toggle Tagbar
 noremap <leader>q :TagbarToggle<CR>
 
-" Search CTags using FZF Files
-nnoremap <leader>. :Tags<cr>
-nnoremap <leader>/ :Ag<cr>
-nnoremap <leader>b :call fzf#run({'source': map(range(1, bufnr('$')), 'bufname(v:val)'),'sink': 'e', 'down': '30%'})<cr>
+" Clear search buffer
 nnoremap <leader>c :let @/ = ""<cr>
-let $FZF_DEFAULT_COMMAND = 'ag -l -g ""'
-
-" Refresh Tags
-map <f12> :!$HOME/.git_template/hooks/ctags <cr>
 
 " Shortcut for sudo tee on :w
 cmap w!! w !sudo tee % >/dev/null
@@ -197,8 +190,10 @@ autocmd VimEnter * command! -bang -nargs=* Ag call fzf#vim#ag(<q-args>, <bang>0 
 augroup FileTypeGroup
     autocmd!
     au BufNewFile,BufRead *.jsx set filetype=javascript.jsx
-    au BufNewFile,BufRead *.vue set filetype=javascript.jsx
 augroup END
+autocmd Filetype json
+  \ let g:indentLine_setConceal = 0 |
+  \ let g:vim_json_syntax_conceal = 0
 
 " Color Scheme
 let g:afterglow_italic_comments=0

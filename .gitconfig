@@ -3,6 +3,7 @@
     email = emanuelcds@gmail.com
 [init]
     templatedir = ~/.git_template
+	defaultBranch = main
 [core]
     excludesfile = /Users/emanuel/.gitignore
     editor = nvim
@@ -17,3 +18,6 @@
 
 [merge]
     tool = vimdiff
+[pull]
+	rebase = false
+	ff = only
