@@ -36,7 +36,7 @@ call plug#end()
 "Language Servers
 lua << EOF
 -- Python Support
-require 'lspconfig'.pylsp.setup({})
+require 'lspconfig'.pylsp.setup{}
 
 -- Bash Script
 require'lspconfig'.bashls.setup{}

@@ -7,8 +7,6 @@ alias intel="arch -x86_64"
 alias intel-shell="intel $SHELL"
 alias pyenv="arch -x86_64 env LDFLAGS=\"-L$(xcrun --show-sdk-path)/usr/lib\" SYSTEM_VERSION_COMPAT=1 pyenv"
 alias vim=nvim
-alias python=python3
-alias pip=pip3
 
 
 # User Defined Functions
