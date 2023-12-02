@@ -34,7 +34,7 @@ brew install luajit
 brew install neovim
 brew install hub
 brew install starship
-brew install jdtls
+brew install tig
 
 # installing sdkman
 curl -s "https://get.sdkman.io" | bash
