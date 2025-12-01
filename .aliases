@@ -3,10 +3,15 @@ alias ll='ls -laG'
 alias manage='python manage.py'
 alias clear-branches='for branch in `git branch | egrep -v \s?(master|pm-develop).*$ | xargs`; do git branch -D $branch; done'
 alias g=git
-alias intel="arch -x86_64"
-alias intel-shell="intel $SHELL"
-alias pyenv="arch -x86_64 env LDFLAGS=\"-L$(xcrun --show-sdk-path)/usr/lib\" SYSTEM_VERSION_COMPAT=1 pyenv"
+alias intel='eval "$(/usr/local/bin/brew shellenv) && arch -x86_64'
 alias vim=nvim
+alias pip=pip3
+
+alias arm="arch -arm64 /bin/zsh --login"
+alias intel="arch -X86_64 /bin/zsh --login"
+
+alias brow="arch -X86_64 /usr/local/bin/brew"
+
 
 
 # User Defined Functions

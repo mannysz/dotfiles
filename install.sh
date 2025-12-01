@@ -12,8 +12,8 @@ ln -s $DIRNAME/.bash_completion $HOME/.bash_completion
 ln -s $DIRNAME/.tmux.conf $HOME/.tmux.conf
 
 # NeoVim Settings
-ln -s $DIRNAME/.config $HOME/.config
-ln -s $DIRNAME/.vimrc $HOME/.vimrc
+#ln -s $DIRNAME/.config $HOME/.config
+#ln -s $DIRNAME/.vimrc $HOME/.vimrc
 
 # Git Configuration
 ln -s $DIRNAME/.git_template $HOME/.git_template
@@ -33,15 +33,15 @@ brew install lua
 brew install luajit
 brew install neovim
 brew install hub
-brew install starship
+# brew install starship
 brew install tig
 
 # installing sdkman
-curl -s "https://get.sdkman.io" | bash
-source "$HOME/.sdkman/bin/sdkman-init.sh"
-sdk install java 17.0.9-jbr
-sdk install maven 3.9.6
-sdk install gradle 8.5
+# curl -s "https://get.sdkman.io" | bash
+# source "$HOME/.sdkman/bin/sdkman-init.sh"
+# sdk install java 17.0.9-jbr
+# sdk install maven 3.9.6
+# sdk install gradle 8.5
 
 # installing tmux plugin manager
 git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
@@ -56,6 +56,7 @@ n lts
 # Language Servers
 brew install bash-language-server
 pyenv exec pip install python-lsp-server
+pip install python-lsp-server
 npm install -g typescript-language-server
 
 # Installing VIM Plugins

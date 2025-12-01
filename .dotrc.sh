@@ -17,6 +17,9 @@ export LOOKUPPATH=$HOME/repo:$HOME/src
 # Add Homebrew to Path
 export PATH="$PATH:/opt/homebrew/bin"
 
+# Add local bin to path
+export PATH="$PATH:$HOME/.local/bin"
+
 # Add Node version manager to Path
 export PATH="$PATH:$N_PREFIX/bin"
 
@@ -32,4 +35,5 @@ autoload -Uz compinit
 compinit
 
 source $HOME/.bash_completion
-source $HOME/.sdkman/bin/sdkman-init.sh
+source <(fzf --zsh)
+# source $HOME/.sdkman/bin/sdkman-init.sh
