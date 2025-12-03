@@ -28,27 +28,21 @@ brew install tmux
 brew install fzf
 brew install ag
 brew install n
+brew install bun
 brew install pyenv
 brew install lua
 brew install luajit
 brew install neovim
 brew install hub
-# brew install starship
+brew install ripgrep
 brew install tig
-
-# installing sdkman
-# curl -s "https://get.sdkman.io" | bash
-# source "$HOME/.sdkman/bin/sdkman-init.sh"
-# sdk install java 17.0.9-jbr
-# sdk install maven 3.9.6
-# sdk install gradle 8.5
 
 # installing tmux plugin manager
 git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 
 # Python
-pyenv install 3.12.0
-pyenv global 3.12.0
+pyenv install 3.14.0
+pyenv global 3.14.0
 
 # NodeJS
 n lts
@@ -56,8 +50,12 @@ n lts
 # Language Servers
 brew install bash-language-server
 pyenv exec pip install python-lsp-server
+npm install -g pyright
 pip install python-lsp-server
-npm install -g typescript-language-server
+npm install -g typescript-language-server typescript
+bun install -g typescript-language-server typescript
+npm install -g vscode-langservers-extracted
+bun install -g vscode-langservers-extracted
 
 # Installing VIM Plugins
 sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs \
